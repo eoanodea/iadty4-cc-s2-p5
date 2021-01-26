@@ -6,35 +6,27 @@
  * Author: Eoan O'Dea (eoan@web-space.design)
  * -----
  * File Description:
- * Last Modified: Tuesday, 26th January 2021 2:25:31 pm
+ * Last Modified: Tuesday, 26th January 2021 2:59:16 pm
  * Modified By: Eoan O'Dea (eoan@web-space.design>)
  * -----
  * Copyright 2021 WebSpace, WebSpace
  */
 
-var xPos;
-var yPos;
-// var speed = 20;
-var angle = 120;
-var stepSize = 1;
-var diameter = 1;
-var stepSize = 2;
-var optionsX = [-1, 0, 1, 1];
-var optionsY = [-1, 0, 1, 1];
+var xPos = 250;
+var yPos = 250;
+
+var angle = 0;
+var stepSize = 0.1;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   background(0);
-
-  xPos = 0;
-  yPos = 0;
 }
 
 function draw() {
-  let speed = map(mouseX, 0, width, 2, 10);
-  // let diam = map(mouseY, 0, height, 1, 10);
+  // let speed = map(mouseX, 0, width, 2, 10);
 
-  for (let x = 0; x < 10; x++) {
+  for (let x = 0; x < 5; x++) {
     stroke(255);
     strokeWeight(10);
 
@@ -43,4 +35,25 @@ function draw() {
     xPos += cos(radians(angle)) + stepSize;
     yPos += sin(radians(angle)) + stepSize;
   }
+
+  if (
+    yPos > window.innerHeight ||
+    yPos < 0 ||
+    xPos > window.innerWidth ||
+    xPos < 0
+  ) {
+    angle = getRandomAngle(xPos, yPos);
+  }
+}
+
+function getRandomAngle(_x, _y) {
+  const angle = floor(random(0, 180));
+
+  if (_y < 0) return angle;
+
+  if (_y > height) return angle + 180;
+
+  if (_x > width) return angle + 90;
+
+  if (_x < 0) return angle + 270;
 }
