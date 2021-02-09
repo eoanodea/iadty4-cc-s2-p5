@@ -6,7 +6,7 @@
  * Author: Eoan O'Dea (eoan@web-space.design)
  * -----
  * File Description:
- * Last Modified: Tuesday, 9th February 2021 2:25:19 pm
+ * Last Modified: Tuesday, 9th February 2021 3:03:34 pm
  * Modified By: Eoan O'Dea (eoan@web-space.design>)
  * -----
  * Copyright 2021 WebSpace, WebSpace
@@ -15,7 +15,7 @@
 let points = [];
 
 let radius = 150;
-let numOfSegments = 16;
+let numOfSegments = 50;
 
 let stepX = 3;
 let stepY = 5;
@@ -32,36 +32,33 @@ function setup() {
 
     points.push(createVector(xPos, yPos));
   }
-}
 
-function draw() {
-  background(0);
   push();
-  translate(width / 2, height / 2);
 
-  beginShape();
+  translate(0, height / 2);
 
   stroke(255);
-
   beginShape();
 
   // First Control Point (Not Drawn)
+
   curveVertex(points[points.length - 1].x, points[points.length - 1].y);
 
   for (let i = 0; i < points.length; i++) {
-    curveVertex(points[i].x, points[i].y);
+    const multiplier = round(random(-1, 0));
+    curveVertex(
+      (points[i].x = i * 25),
+      (points[i].y = i * (multiplier === -1 ? -1 : 1))
+    );
   }
 
-  curveVertex(points[0].x, points[0].y);
-  curveVertex(points[1].x, points[1].y);
-
   endShape();
-  stroke(255);
-
   pop();
+}
 
+function draw() {
   for (let i = 0; i < points.length; i++) {
-    points[round(random(0, points.length - 1))].x += random(-stepX, stepX);
-    points[round(random(0, points.length - 1))].y += random(-stepY, stepY);
+    points[i].y += cos(frameCount / 150) * 0.8;
+    points[i].x += sin(frameCount / 100) * 0.8;
   }
 }
