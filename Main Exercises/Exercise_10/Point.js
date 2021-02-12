@@ -6,7 +6,7 @@
  * Author: Eoan O'Dea (eoan@web-space.design)
  * -----
  * File Description:
- * Last Modified: Friday, 12th February 2021 4:37:37 pm
+ * Last Modified: Friday, 12th February 2021 4:42:22 pm
  * Modified By: Eoan O'Dea (eoan@web-space.design>)
  * -----
  * Copyright 2021 WebSpace, WebSpace
@@ -15,7 +15,6 @@
 class Point {
   constructor(_x, _y, _root) {
     this.position = createVector(_x, _y);
-    // this.root = _root;
     this.rootI = _root;
     this.setPosition = this.position;
     this.distance =
@@ -37,11 +36,7 @@ class Point {
         this.amount
       );
       this.distance = this.setPosition.dist(points[this.rootI].setPosition);
-    } else {
-      //   this.finsihed = true;
-      this.setIsFinished();
-      //   console.log("yes!", this.finished);
-    }
+    } else this.setIsFinished();
 
     ellipse(this.setPosition.x, this.setPosition.y, 20, 20);
   }
