@@ -23,7 +23,8 @@ let stepY = 0.8;
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   // background("#F14719");
-  background("#fff");
+  // background("#fff");
+  background(0);
 
   let angle = radians(360 / numOfSegments);
 
@@ -38,8 +39,7 @@ function setup() {
 }
 
 function draw() {
-  // background("#F14719");
-  background("#fff");
+  background(0);
 
   push();
   translate(width / 2, height / 2);
