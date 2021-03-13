@@ -22,7 +22,7 @@ let stepY = 5;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  background(0);
+  background(255);
 
   let angle = radians(360 / numOfSegments);
 
@@ -35,14 +35,14 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255);
   push();
   translate(width / 2, height / 2);
 
   beginShape();
 
-  stroke(255);
-
+  stroke(0);
+  fill(0);
   beginShape();
 
   // First Control Point (Not Drawn)
@@ -56,7 +56,7 @@ function draw() {
   curveVertex(points[1].x, points[1].y);
 
   endShape();
-  stroke(255);
+  stroke(0);
 
   pop();
 
