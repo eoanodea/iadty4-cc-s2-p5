@@ -22,7 +22,8 @@ let stepY = 0.8;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  background("#F14719");
+  // background("#F14719");
+  background("#fff");
 
   let angle = radians(360 / numOfSegments);
 
@@ -37,15 +38,16 @@ function setup() {
 }
 
 function draw() {
-  background("#F14719");
+  // background("#F14719");
+  background("#fff");
 
   push();
   translate(width / 2, height / 2);
 
   beginShape();
 
-  stroke(0);
-  fill(0);
+  stroke("#F14719");
+  fill("#F14719");
   beginShape();
 
   // First Control Point (Not Drawn)
@@ -59,12 +61,15 @@ function draw() {
   curveVertex(points[1].x, points[1].y);
 
   endShape();
-  stroke(0);
+  stroke("#F14719");
 
   pop();
 
   for (let i = 0; i < points.length; i++) {
     points[round(random(0, points.length - 1))].x += random(-stepX, stepX);
     points[round(random(0, points.length - 1))].y += random(-stepY, stepY);
+    // translate(0, 0);
+    // points[round(random(0, points.length - 1))].x = mouseX + 50 * i;
+    // points[round(random(0, points.length - 1))].y = mouseY + 50 * i;
   }
 }
