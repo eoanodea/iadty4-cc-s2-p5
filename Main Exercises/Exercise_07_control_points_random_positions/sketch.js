@@ -17,12 +17,12 @@ let points = [];
 let radius = 150;
 let numOfSegments = 16;
 
-let stepX = 3;
-let stepY = 5;
+let stepX = 0.8;
+let stepY = 0.8;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  background(255);
+  background("#F14719");
 
   let angle = radians(360 / numOfSegments);
 
@@ -32,10 +32,13 @@ function setup() {
 
     points.push(createVector(xPos, yPos));
   }
+
+  smooth(1);
 }
 
 function draw() {
-  background(255);
+  background("#F14719");
+
   push();
   translate(width / 2, height / 2);
 
