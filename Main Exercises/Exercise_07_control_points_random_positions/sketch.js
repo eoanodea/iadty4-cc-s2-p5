@@ -13,17 +13,17 @@
  */
 
 let points = [];
+let originalPos = [];
 
-let radius = 150;
-let numOfSegments = 16;
+let radius = 200;
+let numOfSegments = 100;
 
 let stepX = 0.8;
 let stepY = 0.8;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  // background("#F14719");
-  // background("#fff");
+
   background(0);
 
   let angle = radians(360 / numOfSegments);
@@ -35,7 +35,7 @@ function setup() {
     points.push(createVector(xPos, yPos));
   }
 
-  smooth(1);
+  originalPos = points;
 }
 
 function draw() {
@@ -43,33 +43,43 @@ function draw() {
 
   push();
   translate(width / 2, height / 2);
-
-  beginShape();
-
+  vertObjects = [];
   stroke("#F14719");
   fill("#F14719");
   beginShape();
 
-  // First Control Point (Not Drawn)
   curveVertex(points[points.length - 1].x, points[points.length - 1].y);
 
-  for (let i = 0; i < points.length; i++) {
+  for (var i = 0; i < points.length; i++) {
+    const range = 0.2;
+    const spiciness = 20;
+
+    const offsetX = map(random([-1, 1]), -1, 1, -range, range);
+    const offsetY = map(random([-1, 1]), -1, 1, -range, range);
+
+    if (
+      points[i].y + offsetX < originalPos[i].x + range * spiciness &&
+      points[i].x + offsetX > originalPos[i].x - range * spiciness
+    ) {
+      points[i].x += offsetX;
+    }
+
+    if (
+      points[i].y + offsetY < originalPos[i].y + range * spiciness &&
+      points[i].y + offsetY > originalPos[i].y - range * spiciness
+    ) {
+      points[i].y += offsetY;
+    }
+
     curveVertex(points[i].x, points[i].y);
-  }
+    // curveVertex(points[0].x, points[0].y);
+    // curveVertex(points[38].x, points[38].y);
 
+    vertObjects.push(createVector(points[i].x, points[i].y));
+  }
   curveVertex(points[0].x, points[0].y);
-  curveVertex(points[1].x, points[1].y);
+  // curveVertex(points[1].x, points[1].y);
 
-  endShape();
-  stroke("#F14719");
-
+  endShape(CLOSE);
   pop();
-
-  for (let i = 0; i < points.length; i++) {
-    points[round(random(0, points.length - 1))].x += random(-stepX, stepX);
-    points[round(random(0, points.length - 1))].y += random(-stepY, stepY);
-    // translate(0, 0);
-    // points[round(random(0, points.length - 1))].x = mouseX + 50 * i;
-    // points[round(random(0, points.length - 1))].y = mouseY + 50 * i;
-  }
 }
