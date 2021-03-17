@@ -15,7 +15,7 @@
 let points = [];
 let originalPos = [];
 
-let radius = 200;
+let radius = 150;
 let numOfSegments = 100;
 
 let stepX = 0.8;
@@ -78,7 +78,7 @@ function draw() {
     vertObjects.push(createVector(points[i].x, points[i].y));
   }
   curveVertex(points[0].x, points[0].y);
-  // curveVertex(points[1].x, points[1].y);
+  curveVertex(points[1].x, points[1].y);
 
   endShape(CLOSE);
   pop();
